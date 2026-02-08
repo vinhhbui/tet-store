@@ -30,7 +30,7 @@ export default function Banner({ products, onProductClick }: BannerProps) {
             
             {/* Ảnh sản phẩm (Giả sử product.image là array string hoặc string) */}
             <img 
-              src={Array.isArray(product.images) ? product.images[0] : (product.image || '/placeholder.jpg')} 
+              src={Array.isArray(product.image) ? product.image[0] : (product.image || '/placeholder.jpg')} 
               alt={product.name}
               className="absolute inset-0 w-full h-full object-cover"
             />
