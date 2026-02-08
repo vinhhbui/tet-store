@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/* Định nghĩa màu Tết trực tiếp trong CSS theo chuẩn v4 */
+@theme {
+  --color-tet-red: #A04433;
+  --color-tet-gold: #E2B97F;
+  --color-tet-rust: #B87356;
+  --color-tet-dark: #3E2C23;
+  --color-tet-cream: #FDFBF7; /* Màu kem sáng mới */
+}
+
+body {
+  background-color: var(--color-tet-cream);
+  color: #333; /* Chữ màu tối cho nền sáng */
+  
+  /* Cập nhật phần này để hiển thị ảnh nền */
+  background-image: url('/bg-tet.jpg'); /* Đường dẫn tới ảnh trong thư mục public */
+  background-size: cover;          /* Phủ kín toàn bộ màn hình */
+  background-position: center;     /* Căn giữa ảnh */
+  background-attachment: fixed;    /* Cố định ảnh khi cuộn trang */
+  background-repeat: no-repeat;    /* Không lặp lại ảnh */
+}
+
+@layer utilities {
+  /* Hiệu ứng mờ dần (Dùng cho nền đen) */
+  .animate-fade-in {
+    animation: fadeOut 0.4s ease-out forwards;
+  }
+
+  /* Hiệu ứng trượt lên (Dùng cho hộp thoại popup) */
+  .animate-slide-up {
+    animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Ẩn thanh cuộn cho Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Ẩn thanh cuộn cho IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+/* Định nghĩa Keyframes */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+  }
+  to { 
+    opacity: 1; 
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95); /* Bắt đầu thấp hơn một chút và nhỏ hơn */
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Trở về vị trí chuẩn và kích thước chuẩn */
+  }
+}
+
+
