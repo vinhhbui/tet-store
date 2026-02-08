@@ -99,7 +99,7 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-4">
           {products.map((p) => (
             <div key={p.id} onClick={() => setSelectedProduct(p)}>
-              <ProductCard product={p} />
+              <ProductCard product={p as any} />
             </div>
           ))}
         </div>
