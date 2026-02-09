@@ -17,7 +17,7 @@ body {
   background-image: url('/bg-tet.jpg'); /* Đường dẫn tới ảnh trong thư mục public */
   background-size: cover;          /* Phủ kín toàn bộ màn hình */
   background-position: center;     /* Căn giữa ảnh */
-  background-attachment: fixed;    /* Cố định ảnh khi cuộn trang */
+  background-attachment: scroll;    /* Cố định ảnh khi cuộn trang */
   background-repeat: repeat;    /* Không lặp lại ảnh */
 }
 
