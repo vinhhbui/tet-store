@@ -17,6 +17,7 @@ export default function ProductManager() {
   const [formData, setFormData] = useState({
     name: "",
     price: 0,
+    type: "",
     image: "", // String theo hình
     combos: [] as Combo[]
   });
@@ -35,6 +36,7 @@ export default function ProductManager() {
       const dataToSave = {
         name: formData.name,
         price: Number(formData.price),
+        type: formData.type,
         image: formData.image,
         combos: formData.combos.map(c => ({
             label: c.label,
@@ -58,7 +60,7 @@ export default function ProductManager() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", price: 0, image: "", combos: [] });
+    setFormData({ name: "", price: 0, type: "", image: "", combos: [] });
     setEditingId(null);
   }
 
@@ -67,6 +69,7 @@ export default function ProductManager() {
     setFormData({
       name: p.name,
       price: p.price,
+      type: p.type || "",
       image: p.image || (p.images && p.images[0]) || "", // Fallback nếu dữ liệu cũ dùng mảng images
       // Nếu chưa có combo, tạo mặc định
       combos: p.combos || [
@@ -128,6 +131,16 @@ export default function ProductManager() {
                     className="w-full p-2 rounded bg-white/20" required
                 />
             </div>
+        </div>
+        
+        <div>
+            <label className="block text-sm opacity-70 mb-1">Đơn vị (Type)</label>
+            <input 
+                placeholder="Ví dụ: trái, set, hộp, kg..." 
+                value={formData.type}
+                onChange={e => setFormData({...formData, type: e.target.value})}
+                className="w-full p-2 rounded bg-white/20"
+            />
         </div>
         
         <div>
@@ -203,7 +216,10 @@ export default function ProductManager() {
               <img src={p.image || (p.images && p.images[0])} className="w-12 h-12 object-cover rounded bg-white/10" alt="" />
               <div>
                 <div className="font-bold">{p.name}</div>
-                <div className="text-sm text-[var(--color-tet-gold)]">{p.price?.toLocaleString()}đ</div>
+                <div className="text-sm text-[var(--color-tet-gold)]">
+                  {p.price?.toLocaleString()}đ
+                  {p.type && <span className="opacity-70"> / {p.type}</span>}
+                </div>
                 <div className="text-xs opacity-50">{p.combos?.length || 0} combos</div>
               </div>
             </div>
