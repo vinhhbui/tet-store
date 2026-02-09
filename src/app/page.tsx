@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import ProductCard from "@/components/ProductCard";
-import Banner from "@/components/Banner"; // Import Banner
+import Banner from "@/components/Banner";
 import ProductPopup from "@/components/ProductPopup";
 import CartPopup from "@/components/CartPopup";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Product } from "@/types/product";
 
 export default function Home() {
@@ -64,64 +66,52 @@ export default function Home() {
   const totalPrice = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
 
   return (
-    <main className="min-h-screen p-4 pb-24">
-      <header className="text-center my-6 flex justify-between items-center">
-        <div />
-        <h1 className="text-3xl font-bold uppercase tracking-widest text-[var(--color-tet-gold)] font-serif">
-          Chợ Tết
-        </h1>
-        <button
-          onClick={() => setShowCart(true)}
-          className="relative bg-[var(--color-tet-gold)] text-[var(--color-tet-red)] px-4 py-2 rounded-lg font-bold hover:opacity-90"
-        >
-          🛒 Cart
-          {cartItems.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-              {cartItems.length}
-            </span>
-          )}
-        </button>
-      </header>
+    <>
+      <Header cartCount={cartItems.length} onCartClick={() => setShowCart(true)} />
+      
+      <main className="pt-20 pb-40 px-4">
+        {/* Hiển thị Banner khi đã load xong dữ liệu */}
+        {!loading && products.length > 0 && (
+          <Banner
+            products={products}
+            onProductClick={setSelectedProduct}
+          />
+        )}
 
-      {/* Hiển thị Banner khi đã load xong dữ liệu */}
-      {!loading && products.length > 0 && (
-        <Banner
-          products={products}
-          onProductClick={setSelectedProduct}
-        />
-      )}
+        {loading ? (
+          <div className="text-center text-[var(--color-tet-gold)] mt-10">
+            Đang dọn hàng ra... ⏳
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-4">
+            {products.map((p) => (
+              <div key={p.id} onClick={() => setSelectedProduct(p)}>
+                <ProductCard product={p as any} />
+              </div>
+            ))}
+          </div>
+        )}
 
-      {loading ? (
-        <div className="text-center text-[var(--color-tet-gold)] mt-10">
-          Đang dọn hàng ra... ⏳
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 gap-4">
-          {products.map((p) => (
-            <div key={p.id} onClick={() => setSelectedProduct(p)}>
-              <ProductCard product={p as any} />
-            </div>
-          ))}
-        </div>
-      )}
+        {selectedProduct && (
+          <ProductPopup
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            onAddToCart={handleAddToCart}
+          />
+        )}
 
-      {selectedProduct && (
-        <ProductPopup
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onAddToCart={handleAddToCart}
-        />
-      )}
+        {showCart && (
+          <CartPopup
+            items={cartItems}
+            total={totalPrice}
+            onClose={() => setShowCart(false)}
+            onRemoveItem={handleRemoveItem}
+          />
+        )}
+      </main>
 
-      {showCart && (
-        <CartPopup
-          items={cartItems}
-          total={totalPrice}
-          onClose={() => setShowCart(false)}
-          onRemoveItem={handleRemoveItem}
-        />
-      )}
-    </main>
+      <Footer />
+    </>
   );
 }
 
