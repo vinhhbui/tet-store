@@ -19,6 +19,7 @@ interface Product {
   id: string;
   name: string;
   price: number;
+  type?: string;
   image: string;
   combos: ComboOption[]; // Thêm trường này
 }
@@ -48,6 +49,7 @@ export default function ProductPopup({ product, onClose, onAddToCart }: PopupPro
             id: docSnap.id,
             name: data.name,
             price: data.price,
+            type: data.type,
             image: data.image,
             combos: data.combos || [] // Lấy mảng combos, nếu không có thì mảng rỗng
           } as Product;
@@ -119,6 +121,7 @@ export default function ProductPopup({ product, onClose, onAddToCart }: PopupPro
               <h3 className="font-bold text-lg leading-tight">{currentProduct.name}</h3>
               <p className="opacity-80 text-sm mt-1">
                 Đơn giá gốc: {currentProduct.price.toLocaleString()}đ
+                {currentProduct.type && <span> / {currentProduct.type}</span>}
               </p>
             </div>
           </div>

@@ -40,6 +40,7 @@ export default function Banner({ products, onProductClick }: BannerProps) {
               <h3 className="text-white font-bold text-lg truncate">{product.name}</h3>
               <p className="text-[var(--color-tet-gold)] font-bold">
                 {product.price?.toLocaleString()}đ
+                {product.type && <span> / {product.type}</span>}
               </p>
               <span className="text-xs text-white/80 italic">Chạm để xem chi tiết</span>
             </div>

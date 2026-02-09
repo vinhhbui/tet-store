@@ -28,6 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
       
       <p className="text-sm opacity-90 mt-1 font-mono">
         {product.price.toLocaleString('vi-VN')}đ
+        {product.type && <span className="text-[var(--color-tet-gold)]"> / {product.type}</span>}
       </p>
       
       {product.type === 'combo' && (
