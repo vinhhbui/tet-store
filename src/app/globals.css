@@ -18,7 +18,7 @@ body {
   background-size: cover;          /* Phủ kín toàn bộ màn hình */
   background-position: center;     /* Căn giữa ảnh */
   background-attachment: fixed;    /* Cố định ảnh khi cuộn trang */
-  background-repeat: no-repeat;    /* Không lặp lại ảnh */
+  background-repeat: repeat;    /* Không lặp lại ảnh */
 }
 
 @layer utilities {
