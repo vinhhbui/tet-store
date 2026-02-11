@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <>
       <Header cartCount={cartItems.length} onCartClick={() => setShowCart(true)} />
-      
+
       <main className="pt-20 pb-40 px-4">
         {/* Hiển thị Banner khi đã load xong dữ liệu */}
         {!loading && products.length > 0 && (
@@ -77,9 +77,9 @@ export default function Home() {
             onProductClick={setSelectedProduct}
           />
         )}
-      <h2 className="text-[var(--color-tet-gold)] font-bold mb-3 uppercase text-sm tracking-wider flex items-center gap-2">
-        <span></span> Gian hàng Tết nhà Vinh
-      </h2>
+        <h2 className="text-[var(--color-tet-gold)] font-bold mb-3 uppercase text-sm tracking-wider flex items-center gap-2">
+          <span></span> Gian hàng Tết nhà Vinh
+        </h2>
         {loading ? (
           <div className="text-center text-[var(--color-tet-gold)] mt-10">
             Đang dọn hàng ra... ⏳

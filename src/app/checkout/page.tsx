@@ -398,6 +398,8 @@ export default function CheckoutPage() {
 
         </div>
       </div>
+      <div className="h-20"></div>
+
       <Footer />
     </>
 
