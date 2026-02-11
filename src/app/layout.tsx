@@ -14,6 +14,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Chợ Tết Nhà Vinh",
+  icons: {
+    icon: [
+      {
+        url: '/favicon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+  },
   description: "Chợ Tết Nhà Vinh - Đồ Tết chất lượng, giá hợp lý cho một mùa Tết an lành và hạnh phúc!",
 };
 

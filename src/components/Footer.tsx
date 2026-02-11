@@ -28,7 +28,7 @@ export default function Footer() {
 
         {/* Bottom row - Copyright */}
         <div className="text-center text-[10px] text-[var(--color-tet-gold)] border-t border-[var(--color-tet-gold)] pt-2">
-          <p className="font-semibold">Copyright {currentYear} by Vinh</p>
+          <p className="font-semibold">Copyright © {currentYear} by Vinh</p>
           <p className="text-[9px] opacity-80">Vạng sự như ý | Mã đáo thành công</p>
         </div>
       </div>

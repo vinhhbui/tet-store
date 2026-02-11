@@ -77,7 +77,9 @@ export default function Home() {
             onProductClick={setSelectedProduct}
           />
         )}
-
+      <h2 className="text-[var(--color-tet-gold)] font-bold mb-3 uppercase text-sm tracking-wider flex items-center gap-2">
+        <span></span> Gian hàng Tết nhà Vinh
+      </h2>
         {loading ? (
           <div className="text-center text-[var(--color-tet-gold)] mt-10">
             Đang dọn hàng ra... ⏳
@@ -109,7 +111,6 @@ export default function Home() {
           />
         )}
       </main>
-
       <Footer />
     </>
   );
