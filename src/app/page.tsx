@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import ProductCard from "@/components/ProductCard";
 import Banner from "@/components/Banner";
 import ProductPopup from "@/components/ProductPopup";
@@ -9,9 +9,11 @@ import CartPopup from "@/components/CartPopup";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Product } from "@/types/product";
+import { BannerPost } from "@/types/banner";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [bannerPosts, setBannerPosts] = useState<BannerPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -19,21 +21,34 @@ export default function Home() {
 
   // Lấy dữ liệu từ Firebase
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "products"));
-        const productsData = querySnapshot.docs.map((doc) => ({
+        // Fetch products
+        const productsSnapshot = await getDocs(collection(db, "products"));
+        const productsData = productsSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         } as Product));
         setProducts(productsData);
+
+        // Fetch banner posts
+        const bannerQuery = query(
+          collection(db, "bannerPosts"),
+          orderBy("createdAt", "desc")
+        );
+        const bannerSnapshot = await getDocs(bannerQuery);
+        const bannerData = bannerSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        } as BannerPost));
+        setBannerPosts(bannerData);
       } catch (error) {
-        console.error("Lỗi lấy sản phẩm:", error);
+        console.error("Lỗi lấy dữ liệu:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchProducts();
+    fetchData();
   }, []);
 
   // Load cart từ localStorage khi trang mở
@@ -70,13 +85,11 @@ export default function Home() {
       <Header cartCount={cartItems.length} onCartClick={() => setShowCart(true)} />
 
       <main className="pt-20 pb-40 px-4">
-        {/* Hiển thị Banner khi đã load xong dữ liệu */}
-        {!loading && products.length > 0 && (
-          <Banner
-            products={products}
-            onProductClick={setSelectedProduct}
-          />
+        {/* Hiển thị Banner Blog khi đã load xong */}
+        {!loading && bannerPosts.length > 0 && (
+          <Banner posts={bannerPosts} />
         )}
+
         <h2 className="text-[var(--color-tet-gold)] font-bold mb-3 uppercase text-sm tracking-wider flex items-center gap-2">
           <span></span> Gian hàng Tết nhà Vinh
         </h2>

@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 // Cấu hình Firebase - thay thế bằng config từ Firebase Console
 const firebaseConfig = {
@@ -22,13 +23,13 @@ const firebaseConfig = {
 };
 
 
-console.log('Firebase config check:', { 
-    apiKey: !!firebaseConfig.apiKey, 
-    projectId: !!firebaseConfig.projectId 
+console.log('Firebase config check:', {
+  apiKey: !!firebaseConfig.apiKey,
+  projectId: !!firebaseConfig.projectId
 });
 
 if (!firebaseConfig.apiKey) {
-    console.error('Lỗi: Chưa cấu hình Firebase API Key trong .env.local');
+  console.error('Lỗi: Chưa cấu hình Firebase API Key trong .env.local');
 }
 
 // Khởi tạo Firebase (chỉ khởi tạo 1 lần)
@@ -36,3 +37,6 @@ const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0
 
 // Khởi tạo Firestore
 export const db = getFirestore(app);
+
+// Khởi tạo Storage
+export const storage = getStorage(app);
