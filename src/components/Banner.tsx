@@ -205,7 +205,7 @@ export default function Banner({ posts }: BannerProps) {
                             {post.author}
                           </span>
                         )}
-                        <span>{formatDate(post.createdAt)}</span>
+                        {/* <span>{formatDate(post.createdAt)}</span> */}
                       </div>
                       {/* Hint nhấn để xem */}
                       <span className="inline-block mt-2 text-[var(--color-tet-gold)] text-xs font-medium opacity-80">
@@ -240,7 +240,7 @@ export default function Banner({ posts }: BannerProps) {
                           {post.author}
                         </span>
                       )}
-                      <span>{formatDate(post.createdAt)}</span>
+                      {/* <span>{formatDate(post.createdAt)}</span> */}
                     </div>
                     <span className="inline-block mt-2 text-[var(--color-tet-gold)] text-xs font-medium opacity-80">
                       Nhấn để xem chi tiết →
@@ -355,7 +355,7 @@ export default function Banner({ posts }: BannerProps) {
                     {selectedPost.author}
                   </span>
                 )}
-                <span>📅 {formatDate(selectedPost.createdAt)}</span>
+                {/* <span>📅 {formatDate(selectedPost.createdAt)}</span> */}
                 {selectedPost.updatedAt !== selectedPost.createdAt && (
                   <span className="italic text-white/40">
                     (sửa: {formatDate(selectedPost.updatedAt)})
