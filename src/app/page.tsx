@@ -85,13 +85,16 @@ export default function Home() {
       <Header cartCount={cartItems.length} onCartClick={() => setShowCart(true)} />
 
       <main className="pt-20 pb-40 px-4">
-        {/* Hiển thị Banner Blog khi đã load xong */}
+        {/* Hiển thị Banner Blog khi đã load xong */}        <h2 className="text-[var(--color-tet-gold)] font-bold mb-3 uppercase text-sm tracking-wider flex items-center gap-2">
+          <span></span> ⭐ Blog Tết Vinh
+        </h2>
+
         {!loading && bannerPosts.length > 0 && (
           <Banner posts={bannerPosts} />
         )}
 
         <h2 className="text-[var(--color-tet-gold)] font-bold mb-3 uppercase text-sm tracking-wider flex items-center gap-2">
-          <span></span> Gian hàng Tết nhà Vinh
+          <span></span> ✨ Gian hàng Tết nhà Vinh
         </h2>
         {loading ? (
           <div className="text-center text-[var(--color-tet-gold)] mt-10">
